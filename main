@@ -1,0 +1,29 @@
+name = input("Enter file:")
+handle = open(name)
+
+sender = list()
+sender_list = list()
+counts = dict()
+greatest = None
+greatest_sender = None
+
+for lines in handle:
+    if not lines.startswith("From "): 
+        continue
+
+    stripped = lines.lstrip("From")
+    senders = stripped.split()
+    sender.append(senders)
+
+for email in sender:
+    sender_list.append(email[0])
+
+for person in sender_list:
+    counts[person] = counts.get(person, 0) +1
+
+for word,count in counts.items():
+    if greatest is None or count > greatest:
+        greatest = count
+        greatest_sender = word
+
+print(greatest_sender,greatest)
